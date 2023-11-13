@@ -7,6 +7,9 @@ import { ProductCartCard } from "./Product";
 import { ProductsWrapper } from "@/styles/CartStyles/ProductsWrapper";
 import { FC, useState } from "react";
 import { Product } from "@/models/product";
+import { TotalPrice } from "@/styles/CartStyles/TotalPrice";
+import { FinalizePurchase } from "@/styles/CartStyles/FinalizePurchase";
+
 interface CartProps {
   cart?: { quantity: number; items: Product[] };
   setCart: (cart: { quantity: number; items: Product[] }) => void;
@@ -43,6 +46,19 @@ const Cart: FC<CartProps> = ({ cart, setCart, hideCart }) => {
       [productId]: newQuantity,
     }));
   };
+
+  const calculateTotal = () => {
+    if (!cart) {
+      return 0;
+    }
+
+    return cart.items.reduce(
+      (total, item) =>
+        total + parseFloat(item.price) * (productQuantities[item.id] || 1),
+      0
+    );
+  };
+
   if (!cart) {
     return (
       <CartStyled>
@@ -60,7 +76,7 @@ const Cart: FC<CartProps> = ({ cart, setCart, hideCart }) => {
       <CartTitle>Carrinho de compras</CartTitle>
       <CloseCartButton onClick={hideCart}>X</CloseCartButton>
       <ProductsWrapper>
-        {cart.items.slice(0, 5).map((item) => (
+        {cart.items.map((item) => (
           <div key={item.id}>
             <ProductCartCard
               key={item.id}
@@ -87,6 +103,11 @@ const Cart: FC<CartProps> = ({ cart, setCart, hideCart }) => {
           </div>
         ))}
       </ProductsWrapper>
+      <TotalPrice>
+        <p>Total:</p>
+        <p> R${calculateTotal().toFixed(2)}</p>
+      </TotalPrice>
+      <FinalizePurchase>Finalizar Compra</FinalizePurchase>
     </CartStyled>
   );
 };

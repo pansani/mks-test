@@ -7,6 +7,7 @@ import { useState } from "react";
 import { Product } from "../models/product";
 import Cart from "@/components/Cart/Cart";
 import styled from "styled-components";
+import { Footer } from "@/styles/Footer/Footer";
 
 const HomeContainer = styled.div`
   position: relative;
@@ -20,6 +21,7 @@ export default function Home() {
     quantity: 0,
     items: [],
   });
+  const [addedToCart, setAddedToCart] = useState<number[]>([]);
 
   useEffect(() => {
     const getProducts = async () => {
@@ -51,6 +53,7 @@ export default function Home() {
         quantity: prevCart.quantity + 1,
         items: [...prevCart.items, clickedProduct],
       }));
+      setAddedToCart((prevAdded) => [...prevAdded, productId]);
     }
   };
 
@@ -60,12 +63,17 @@ export default function Home() {
       {loading ? (
         <p>Loading...</p>
       ) : (
-        <ProductCard products={products} addProduct={handleSetQuantity} />
+        <ProductCard
+          products={products}
+          addProduct={handleSetQuantity}
+          addedToCart={addedToCart}
+        />
       )}
 
       {cartVisible && (
         <Cart cart={cart} setCart={setCart} hideCart={handleHideCart} />
       )}
+      <Footer>MKS sistemas © Todos os direitos reservados</Footer>
     </HomeContainer>
   );
 }

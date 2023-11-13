@@ -9,4 +9,5 @@ export const ProductQuantityButton = styled.button`
   color: #000;
   border: none;
   background-color: transparent;
+  cursor: pointer;
 `;

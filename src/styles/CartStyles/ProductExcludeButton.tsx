@@ -12,4 +12,5 @@ export const ProductExcludeButton = styled.button`
   right: -8px;
   top: -8px;
   border: none;
+  cursor: pointer;
 `;
