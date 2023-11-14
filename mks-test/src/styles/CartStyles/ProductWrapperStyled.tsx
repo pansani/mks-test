@@ -11,4 +11,7 @@ export const ProductWrapperStyled = styled.div`
   display: flex;
   margin: 0 auto;
   margin-bottom: 32px;
+  justify-content: space-around;
+  align-items: center;
+  position: relative;
 `;

@@ -7,7 +7,7 @@ import { HeaderSubtitle } from "@/styles/HeaderStyles/HeaderSubtitle";
 import { CartWrapper } from "@/styles/HeaderStyles/HeaderCart/CartWrapper";
 import { CartImage } from "@/styles/HeaderStyles/HeaderCart/CartImage";
 import { CartQuantity } from "@/styles/HeaderStyles/HeaderCart/CartQuantity";
-import cartImage from "../assets/cart-image.svg";
+import cartImage from "../../public/assets/cart-image.svg";
 import { FC } from "react";
 
 interface Props {
@@ -23,7 +23,7 @@ const Header: FC<Props> = ({ productQuantity, showCart }) => {
         <HeaderSubtitle>Sistemas</HeaderSubtitle>
       </TitleWrapper>
       <CartWrapper onClick={showCart}>
-        <CartImage src={cartImage} />
+        <CartImage src={cartImage.src.toString()} />
         <CartQuantity>{productQuantity}</CartQuantity>
       </CartWrapper>
     </HeaderWrapper>
